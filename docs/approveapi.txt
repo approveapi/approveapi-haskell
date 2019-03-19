@@ -768,6 +768,9 @@ instance ApproveApi.MimeTypes.Consumes ApproveApi.API.Approve.CreatePrompt Appro
 instance ApproveApi.MimeTypes.Produces ApproveApi.API.Approve.CreatePrompt ApproveApi.MimeTypes.MimeJSON
 
 
+module ApproveApi.API
+
+
 module ApproveApi.ModelLens
 
 -- | <a>answerMetadataIpAddress</a> Lens

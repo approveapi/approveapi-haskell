@@ -59,6 +59,7 @@ library
       Paths_approveapi
   exposed-modules:
       ApproveApi
+      ApproveApi.API
       ApproveApi.API.Approve
       ApproveApi.Client
       ApproveApi.Core

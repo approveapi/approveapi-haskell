@@ -14,7 +14,8 @@ Module : ApproveApi
 -}
 
 module ApproveApi
-  (  module ApproveApi.Client
+  (  module ApproveApi.API
+  , module ApproveApi.Client
   , module ApproveApi.Core
   , module ApproveApi.Logging
   , module ApproveApi.MimeTypes
@@ -22,7 +23,7 @@ module ApproveApi
   , module ApproveApi.ModelLens
   ) where
 
-
+import ApproveApi.API
 import ApproveApi.Client
 import ApproveApi.Core
 import ApproveApi.Logging

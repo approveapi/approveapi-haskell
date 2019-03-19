@@ -57,7 +57,7 @@ These options allow some customization of the code generation process.
 | OPTION                          | DESCRIPTION                                                                                                                   | DEFAULT  | ACTUAL                                |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------- |
 | allowFromJsonNulls              | allow JSON Null during model decoding from JSON                                                                               | true     | true              |
-| allowNonUniqueOperationIds      | allow *different* API modules to contain the same operationId. Each API must be imported qualified                            | false    | true    |
+| allowNonUniqueOperationIds      | allow *different* API modules to contain the same operationId. Each API must be imported qualified                            | false    | false    |
 | allowToJsonNulls                | allow emitting JSON Null during model encoding to JSON                                                                        | false    | true                |
 | baseModule                      | Set the base module namespace                                                                                                 |          | ApproveApi                      |
 | cabalPackage                    | Set the cabal package name, which consists of one or more alphanumeric words separated by hyphens                             |          | approveapi                    |
