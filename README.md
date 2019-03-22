@@ -1,8 +1,12 @@
 # approveapi-haskell
 
+[![Hackage](https://img.shields.io/hackage/v/approveapi.svg?style=flat)](https://hackage.haskell.org/package/approveapi)
+
+
 Haskell API bindings for the [ApproveAPI HTTP API](https://approveapi.com).
 
 *ApproveAPI is a simple API to request a user's real-time approval on anything via email, sms + mobile push.*
+
 
 ## Getting Started
 
