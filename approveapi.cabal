@@ -3,7 +3,7 @@ version:        0.1.0.0
 synopsis:       ApproveAPI Haskell Client
 description:    .
                 Haskell client for the ApproveAPI HTTP API
-		ApproveAPI is a simple API to request a user's real-time approval on anything via email, sms + mobile push.
+                ApproveAPI is a simple API to request a user's real-time approval on anything via email, sms + mobile push.
                 category:       Web
 homepage:       https://openapi-generator.tech
 author:         Kevin King
