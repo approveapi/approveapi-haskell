@@ -108,6 +108,16 @@ createPromptRequestMetadataL :: Lens_' CreatePromptRequest (Maybe PromptMetadata
 createPromptRequestMetadataL f CreatePromptRequest{..} = (\createPromptRequestMetadata -> CreatePromptRequest { createPromptRequestMetadata, ..} ) <$> f createPromptRequestMetadata
 {-# INLINE createPromptRequestMetadataL #-}
 
+-- | 'createPromptRequestInternalData' Lens
+createPromptRequestInternalDataL :: Lens_' CreatePromptRequest (Maybe (Map.Map String Text))
+createPromptRequestInternalDataL f CreatePromptRequest{..} = (\createPromptRequestInternalData -> CreatePromptRequest { createPromptRequestInternalData, ..} ) <$> f createPromptRequestInternalData
+{-# INLINE createPromptRequestInternalDataL #-}
+
+-- | 'createPromptRequestIdempotencyKey' Lens
+createPromptRequestIdempotencyKeyL :: Lens_' CreatePromptRequest (Maybe Text)
+createPromptRequestIdempotencyKeyL f CreatePromptRequest{..} = (\createPromptRequestIdempotencyKey -> CreatePromptRequest { createPromptRequestIdempotencyKey, ..} ) <$> f createPromptRequestIdempotencyKey
+{-# INLINE createPromptRequestIdempotencyKeyL #-}
+
 
 
 -- * Error
@@ -135,6 +145,11 @@ promptSentAtL f Prompt{..} = (\promptSentAt -> Prompt { promptSentAt, ..} ) <$> 
 promptIsExpiredL :: Lens_' Prompt (Bool)
 promptIsExpiredL f Prompt{..} = (\promptIsExpired -> Prompt { promptIsExpired, ..} ) <$> f promptIsExpired
 {-# INLINE promptIsExpiredL #-}
+
+-- | 'promptRequest' Lens
+promptRequestL :: Lens_' Prompt (CreatePromptRequest)
+promptRequestL f Prompt{..} = (\promptRequest -> Prompt { promptRequest, ..} ) <$> f promptRequest
+{-# INLINE promptRequestL #-}
 
 -- | 'promptAnswer' Lens
 promptAnswerL :: Lens_' Prompt (Maybe PromptAnswer)

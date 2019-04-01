@@ -158,6 +158,25 @@ components:
     Prompt:
       example:
         sent_at: 0.8008281904610115
+        request:
+          metadata:
+            browser: browser
+            operating_system: operating_system
+            location: location
+            time: time
+            ip_address: ip_address
+          long_poll: true
+          reject_text: reject_text
+          internal_data:
+            key: internal_data
+          approve_redirect_url: approve_redirect_url
+          reject_redirect_url: reject_redirect_url
+          idempotency_key: idempotency_key
+          approve_text: approve_text
+          body: body
+          title: title
+          user: user
+          expires_in: 6.027456183070403
         metadata:
           browser: browser
           operating_system: operating_system
@@ -171,7 +190,7 @@ components:
             browser: browser
             operating_system: operating_system
             ip_address: ip_address
-          time: 6.027456183070403
+          time: 1.4658129805029452
         id: id
       properties:
         id:
@@ -183,6 +202,8 @@ components:
         is_expired:
           description: Whether the prompt can still be answered.
           type: boolean
+        request:
+          $ref: '#/components/schemas/CreatePromptRequest'
         answer:
           $ref: '#/components/schemas/PromptAnswer'
         metadata:
@@ -190,6 +211,7 @@ components:
       required:
       - id
       - is_expired
+      - request
       - sent_at
       type: object
     CreatePromptRequest:
@@ -202,13 +224,16 @@ components:
           ip_address: ip_address
         long_poll: true
         reject_text: reject_text
+        internal_data:
+          key: internal_data
         approve_redirect_url: approve_redirect_url
         reject_redirect_url: reject_redirect_url
+        idempotency_key: idempotency_key
         approve_text: approve_text
         body: body
         title: title
         user: user
-        expires_in: 0.8008281904610115
+        expires_in: 6.027456183070403
       properties:
         user:
           description: The user to send the approval request to. Can be either an email address or a phone number.
@@ -239,6 +264,13 @@ components:
           type: number
         metadata:
           $ref: '#/components/schemas/PromptMetadata'
+        internal_data:
+          additionalProperties:
+            type: string
+          type: object
+        idempotency_key:
+          description: Allows calling `create_prompt` multiple times idempotently, such that a prompt is sent at-most once. This key should contain sufficient randomness. Idempotent requests are stored for 24 hours. After that time, the same key will create a new request.
+          type: string
       required:
       - body
       - user
@@ -267,6 +299,10 @@ components:
           description: The operating system initiating the action, i.e. Mac OS X.
           type: string
       type: object
+    PromptInternalData:
+      additionalProperties:
+        type: string
+      type: object
     PromptAnswer:
       example:
         result: true
@@ -274,7 +310,7 @@ components:
           browser: browser
           operating_system: operating_system
           ip_address: ip_address
-        time: 6.027456183070403
+        time: 1.4658129805029452
       properties:
         result:
           description: The user's answer to whether or not they approve this prompt.

@@ -109,6 +109,8 @@ instance Arbitrary CreatePromptRequest where
       <*> arbitrary -- createPromptRequestLongPoll :: Maybe Bool
       <*> arbitrary -- createPromptRequestExpiresIn :: Maybe Double
       <*> arbitrary -- createPromptRequestMetadata :: Maybe PromptMetadata
+      <*> arbitrary -- createPromptRequestInternalData :: Maybe (Map.Map String Text)
+      <*> arbitrary -- createPromptRequestIdempotencyKey :: Maybe Text
     
 instance Arbitrary Error where
   arbitrary =
@@ -121,6 +123,7 @@ instance Arbitrary Prompt where
       <$> arbitrary -- promptId :: Text
       <*> arbitrary -- promptSentAt :: Double
       <*> arbitrary -- promptIsExpired :: Bool
+      <*> arbitrary -- promptRequest :: CreatePromptRequest
       <*> arbitrary -- promptAnswer :: Maybe PromptAnswer
       <*> arbitrary -- promptMetadata :: Maybe PromptMetadata
     

@@ -1,5 +1,5 @@
 name:           approveapi
-version:        0.1.0.0
+version:        0.1.3.0
 synopsis:       ApproveAPI Haskell Client
 description:    .
                 Haskell client for the ApproveAPI HTTP API

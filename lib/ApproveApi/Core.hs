@@ -96,14 +96,14 @@ instance P.Show ApproveApiConfig where
 --
 -- configUserAgent:
 --
--- @"approveapi/0.1.0.0"@
+-- @"approveapi/0.1.3.0"@
 --
 newConfig :: IO ApproveApiConfig
 newConfig = do
     logCxt <- initLogContext
     return $ ApproveApiConfig
         { configHost = "https://approve.sh"
-        , configUserAgent = "approveapi/0.1.0.0"
+        , configUserAgent = "approveapi/0.1.3.0"
         , configLogExecWithContext = runDefaultLogExecWithContext
         , configLogContext = logCxt
         , configAuthMethods = []

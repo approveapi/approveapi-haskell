@@ -125,6 +125,8 @@ data CreatePromptRequest = CreatePromptRequest
   , createPromptRequestLongPoll :: !(Maybe Bool) -- ^ "long_poll" - If true, the request waits (long-polls) until the user responds to the prompt or more than 10 minutes pass. Defaults to false.
   , createPromptRequestExpiresIn :: !(Maybe Double) -- ^ "expires_in" - The number of seconds until this request can no longer be answered.
   , createPromptRequestMetadata :: !(Maybe PromptMetadata) -- ^ "metadata"
+  , createPromptRequestInternalData :: !(Maybe (Map.Map String Text)) -- ^ "internal_data"
+  , createPromptRequestIdempotencyKey :: !(Maybe Text) -- ^ "idempotency_key" - Allows calling &#x60;create_prompt&#x60; multiple times idempotently, such that a prompt is sent at-most once. This key should contain sufficient randomness. Idempotent requests are stored for 24 hours. After that time, the same key will create a new request.
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON CreatePromptRequest
@@ -141,6 +143,8 @@ instance A.FromJSON CreatePromptRequest where
       <*> (o .:? "long_poll")
       <*> (o .:? "expires_in")
       <*> (o .:? "metadata")
+      <*> (o .:? "internal_data")
+      <*> (o .:? "idempotency_key")
 
 -- | ToJSON CreatePromptRequest
 instance A.ToJSON CreatePromptRequest where
@@ -156,6 +160,8 @@ instance A.ToJSON CreatePromptRequest where
       , "long_poll" .= createPromptRequestLongPoll
       , "expires_in" .= createPromptRequestExpiresIn
       , "metadata" .= createPromptRequestMetadata
+      , "internal_data" .= createPromptRequestInternalData
+      , "idempotency_key" .= createPromptRequestIdempotencyKey
       ]
 
 
@@ -176,6 +182,8 @@ mkCreatePromptRequest createPromptRequestUser createPromptRequestBody =
   , createPromptRequestLongPoll = Nothing
   , createPromptRequestExpiresIn = Nothing
   , createPromptRequestMetadata = Nothing
+  , createPromptRequestInternalData = Nothing
+  , createPromptRequestIdempotencyKey = Nothing
   }
 
 -- ** Error
@@ -213,6 +221,7 @@ data Prompt = Prompt
   { promptId :: !(Text) -- ^ /Required/ "id" - A unique id for this prompt.
   , promptSentAt :: !(Double) -- ^ /Required/ "sent_at" - The unix timestamp when this prompt was sent.
   , promptIsExpired :: !(Bool) -- ^ /Required/ "is_expired" - Whether the prompt can still be answered.
+  , promptRequest :: !(CreatePromptRequest) -- ^ /Required/ "request"
   , promptAnswer :: !(Maybe PromptAnswer) -- ^ "answer"
   , promptMetadata :: !(Maybe PromptMetadata) -- ^ "metadata"
   } deriving (P.Show, P.Eq, P.Typeable)
@@ -224,6 +233,7 @@ instance A.FromJSON Prompt where
       <$> (o .:  "id")
       <*> (o .:  "sent_at")
       <*> (o .:  "is_expired")
+      <*> (o .:  "request")
       <*> (o .:? "answer")
       <*> (o .:? "metadata")
 
@@ -234,6 +244,7 @@ instance A.ToJSON Prompt where
       [ "id" .= promptId
       , "sent_at" .= promptSentAt
       , "is_expired" .= promptIsExpired
+      , "request" .= promptRequest
       , "answer" .= promptAnswer
       , "metadata" .= promptMetadata
       ]
@@ -244,12 +255,14 @@ mkPrompt
   :: Text -- ^ 'promptId': A unique id for this prompt.
   -> Double -- ^ 'promptSentAt': The unix timestamp when this prompt was sent.
   -> Bool -- ^ 'promptIsExpired': Whether the prompt can still be answered.
+  -> CreatePromptRequest -- ^ 'promptRequest' 
   -> Prompt
-mkPrompt promptId promptSentAt promptIsExpired =
+mkPrompt promptId promptSentAt promptIsExpired promptRequest =
   Prompt
   { promptId
   , promptSentAt
   , promptIsExpired
+  , promptRequest
   , promptAnswer = Nothing
   , promptMetadata = Nothing
   }
